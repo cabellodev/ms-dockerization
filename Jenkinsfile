@@ -9,7 +9,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    sh 'docker build -t my-image .'
+                    sh 'docker build -t ms-dockerization .'
                 }
             }
         }
@@ -17,7 +17,7 @@ pipeline {
             steps {
                 script {
                     // Mapea el puerto 50500 del contenedor al puerto 50522 en la máquina host
-                    sh 'docker run -d -p 50522:50500 my-image'
+                    sh 'docker run -d -p 50522:50500 ms-dockerization'
                 }
             }
         }
