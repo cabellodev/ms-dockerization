@@ -25,11 +25,20 @@ pipeline {
                 }
             }
         }
-        stage('Build Docker Conteiner') {
+        stage('Build Docker Container') {
             steps {
                 script {
-                    // Mapea el puerto 50500 del contenedor al puerto 50522 en la máquina host
-                    sh 'docker run -d -p 50522:50500 ms-dockerization'
+                    // Detener y eliminar el contenedor viejo si existe
+                    def containerName = 'ms-dockerization'
+                    def containerId = sh(script: "docker ps -q -f name=${containerName}", returnStdout: true).trim()
+
+                    if (containerId) {
+                        sh "docker stop ${containerId}"
+                        sh "docker rm ${containerId}"
+                    }
+
+                    // Ejecutar el nuevo contenedor
+                    sh 'docker run -d -p 50522:50500 --name ms-dockerization ms-dockerization:latest'
                 }
             }
         }
