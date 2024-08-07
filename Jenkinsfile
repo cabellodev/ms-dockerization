@@ -6,14 +6,23 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Build') {
+       
+        stage('Build JAR') {
+            steps {
+                script {
+                    // Ejecuta Maven para construir el archivo JAR
+                    sh 'mvn clean package'
+                }
+            }
+        }
+        stage('Build Docker Image') {
             steps {
                 script {
                     sh 'docker build -t ms-dockerization .'
                 }
             }
         }
-        stage('Run') {
+        stage('Build Docker Conteiner') {
             steps {
                 script {
                     // Mapea el puerto 50500 del contenedor al puerto 50522 en la máquina host
