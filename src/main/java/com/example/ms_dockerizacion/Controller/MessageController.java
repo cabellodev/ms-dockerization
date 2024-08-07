@@ -12,7 +12,7 @@ public class MessageController {
 
     @GetMapping(value="/message")
     public ResponseEntity<DtoMessage>get(){
-         DtoMessage message = DtoMessage.builder().message("ya tomo mucha fuerza el ci/cd ").autor("Sebastian Cabello").build();
+         DtoMessage message = DtoMessage.builder().message("estamos en onda").autor("Sebastian Cabello").build();
                  return ResponseEntity.ok(message);
     }
 }
