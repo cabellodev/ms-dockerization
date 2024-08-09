@@ -38,7 +38,7 @@ pipeline {
                     }
 
                     // Ejecutar el nuevo contenedor
-                    sh 'docker run -d -p 50522:50500 --name ms-dockerization ms-dockerization:latest'
+                    sh 'docker run -d -p 50522:50500 --name ms-dockerization ms-dockerization:latest --network network-system'
                 }
             }
         }
